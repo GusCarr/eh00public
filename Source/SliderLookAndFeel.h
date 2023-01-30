@@ -16,8 +16,11 @@ public:
     // Public attributes.
     bool withBar{false};
     bool fillBack{false};    
-    juce::Colour backgroundColour{juce::Colours::darkgrey};
+    
     juce::Colour foregroundColour{juce::Colours::orange};
+    juce::Colour backgroundColour{juce::Colours::darkgrey};
+    
+    float backgroundAlpha{1.0};
     
 
     // Public methods.
@@ -38,8 +41,14 @@ public:
 
     void setBackgroundColour(const juce::Colour inColour) 
     {
-        backgroundColour = inColour;
+        backgroundColour = inColour.withAlpha(backgroundAlpha);
     };
+
+    void setBackgroundAlpha(const float Alpha) 
+    {
+        backgroundAlpha = Alpha;
+    };
+
 
     void drawLinearSlider (juce::Graphics& g,
                             int x, 

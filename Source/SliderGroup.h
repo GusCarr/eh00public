@@ -28,11 +28,11 @@ public:
 private:        // sliderGroup.h
 
     // Private attributes.
-    unsigned int howMany{8};    // how many sliders this group has.
+    unsigned int howMany{16};    // how many sliders this group has.
     int x0{0};                  // initial position in x.
     int y0{0};                  // initial position in y.
-    int width0{200};            // initial width.
-    int height0{100};           // initial height.
+    int width0{100};            // initial width.
+    int height0{50};           // initial height.
 
     juce::String        name;    
     SliderLookAndFeel   myLookAndFeel;       

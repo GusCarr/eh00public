@@ -11,12 +11,6 @@ MainComponent::MainComponent()
     // setSize (1024, 800);
     setSize (mainWindowGeom::width, mainWindowGeom::height);
 
-    // Sequencers.
-    int x0{100};     //
-    int y0{100};     //
-    int seqW{400};    
-    int seqH{100}; 
-
     // howManySeqs is set to 2 at init in MainComponent.h
     if (howManySeqs > 0)  
     {
@@ -31,7 +25,8 @@ MainComponent::MainComponent()
 
             sequencers[I]->setBounds(x0, y, seqW, seqH);
         }
-    } else
+    } 
+    else
     {
         addAndMakeVisible(seq0);
         seq0.setBounds(50, 50, 650, 200);
@@ -127,16 +122,19 @@ void MainComponent::paint (juce::Graphics& g)
 
 void MainComponent::resized()
 {
-    // if (howManySeqs > 0) 
-    // {
-    //     for (int I = 0; I < howManySeqs; I++)
-    //     {
-    //         if (sequencers[I])
-    //         {
-    //             sequencers[I]->resized();
-    //         }
-    //     }
-    // }
+    if (howManySeqs > 0) 
+    {
+        for (int I = 0; I < howManySeqs; I++)
+        {
+            if (sequencers[I])
+            {
+                auto y = y0 + seqH * I; // vertical position.
+                                
+                sequencers[I]->setBounds(x0, y, seqW, seqH);
+                sequencers[I]->resized();
+            }
+        }
+    }
 }
 
 // eof .-

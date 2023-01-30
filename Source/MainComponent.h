@@ -36,6 +36,13 @@ private:
     const long unsigned int howManySeqs{2};
 
     juce::OwnedArray<SliderGroup> sequencers;
+
+    // Sequencers.
+    int x0{100};     //
+    int y0{100};     //
+    int seqW{400};    
+    int seqH{100}; 
+
     SliderGroup seq0;
         
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (MainComponent)

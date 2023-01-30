@@ -17,10 +17,11 @@ SliderGroup::SliderGroup()
         
         addAndMakeVisible(sliders[I]);
         
-        myLookAndFeel.setForegroundColour(juce::Colours::aquamarine);
-        myLookAndFeel.setBackgroundColour(juce::Colours::blue);        
-        myLookAndFeel.setFillBack(true);        
-        myLookAndFeel.setWithBar(true);
+        myLookAndFeel.setForegroundColour(juce::Colours::black);
+        myLookAndFeel.setBackgroundColour(juce::Colours::orange);        
+        myLookAndFeel.setFillBack(true); 
+        myLookAndFeel.setBackgroundAlpha(0.6); 
+        myLookAndFeel.setWithBar(false);
         
 
         sliders[I]->setLookAndFeel(&myLookAndFeel);
@@ -46,19 +47,16 @@ float SliderGroup::getSliderValue(const int Index)
 }
 
 void SliderGroup::resized()
-{
-    // DBG("width0 = " + juce::String(width0));
+{    
+    width0 = getWidth();
+    height0 = getHeight();    
 
     const int widthI = (int) (width0 / howMany);
 
     for (unsigned int I = 0; I < howMany; I++)
     {
         sliders[I]->setBounds(x0 + widthI * I, y0, widthI, height0);
-    }   
-    DBG("  x0=" + juce::String(x0) +
-        ", y0=" + juce::String(y0) +
-        ", width0=" + juce::String(width0) +
-        ", height0=" + juce::String(height0));    
+    }  
 }
 
 void SliderGroup::sliderValueChanged(juce::Slider* theSlider)
