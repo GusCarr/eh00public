@@ -19,23 +19,43 @@ public:
     //        ---  none.
 
     // Public methods.
+    void realise(const int howMany);
+    // void init(const int howMany, int ix, int iy, int iW, int iH);
     void setName (const juce::String nameIn);
+    void setForegroundColour(const juce::Colour inForegroundColour);
+    void setBackgroundColour(const juce::Colour inBackgroundColour);
+    void setFrameColour(const juce::Colour inColour);    
+    void setBackgroundAlpha(const float inAlpha);
+    void setWithFrame(bool choice);
+
     void paint (juce::Graphics&) override;
     float getSliderValue(const int Index);
+    void setSliderValue(const int Index, const double value);
+    void resetValues(const double value);
     void resized() override;
     void sliderValueChanged(juce::Slider* theSlider) override;
+
+    
 
 private:        // sliderGroup.h
 
     // Private attributes.
-    unsigned int howMany{16};    // how many sliders this group has.
+    unsigned int howMany{0};    // how many sliders this group has.
     int x0{0};                  // initial position in x.
     int y0{0};                  // initial position in y.
     int width0{100};            // initial width.
     int height0{50};           // initial height.
 
-    juce::String        name;    
-    SliderLookAndFeel   myLookAndFeel;       
+    juce::Colour foregroundColour{juce::Colours::black};
+    juce::Colour backgroundColour{juce::Colours::orange};
+    juce::Colour frameColour{juce::Colours::darkgrey};
+    bool withFrame{false};
+
+    float backgroundAlpha{0.6};    
+
+    juce::String        name{"name"};    
+    SliderLookAndFeel   myLookAndFeel;  
+
     juce::OwnedArray<juce::Slider> sliders;
 
     // Private methods.

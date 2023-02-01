@@ -9,17 +9,18 @@ MainComponent::MainComponent()
 {   
 
     // setSize (1024, 800);
-    setSize (mainWindowGeom::width, mainWindowGeom::height);
+    setSize (myWidth, myHeight);
 
     // howManySeqs is set to 2 at init in MainComponent.h
     if (howManySeqs > 0)  
     {
         for (int I = 0; I < howManySeqs; I++)
         {
-            auto y = y0 + seqH * I; // vertical position.
+            auto y = y0 + seqH * I * 1.5; // vertical position.
             
             sequencers.add(new SliderGroup());                       
             sequencers[I]->setName(juce::String(I));
+            sequencers[I]->realise(8 * (I + 1));
 
             addAndMakeVisible(sequencers[I]);
 
@@ -84,7 +85,7 @@ void MainComponent::paint (juce::Graphics& g)
     {
         auto xf = getWidth();
 
-        for (int J = 0; J * divy < mainWindowGeom::height; J++ )
+        for (int J = 0; J * divy < myHeight; J++ )
         {
             auto y = J * divy;
 
@@ -102,7 +103,7 @@ void MainComponent::paint (juce::Graphics& g)
         }
         auto yf = getHeight();
 
-        for (int I = 0; I * divx < mainWindowGeom::width; I++ )
+        for (int I = 0; I * divx < myWidth; I++ )
         {
             auto x = I * divx;
 
@@ -122,19 +123,8 @@ void MainComponent::paint (juce::Graphics& g)
 
 void MainComponent::resized()
 {
-    if (howManySeqs > 0) 
-    {
-        for (int I = 0; I < howManySeqs; I++)
-        {
-            if (sequencers[I])
-            {
-                auto y = y0 + seqH * I; // vertical position.
-                                
-                sequencers[I]->setBounds(x0, y, seqW, seqH);
-                sequencers[I]->resized();
-            }
-        }
-    }
+    myWidth = getWidth();
+    myHeight = getHeight();
 }
 
 // eof .-

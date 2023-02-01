@@ -12,12 +12,6 @@ class MainComponent  : public juce::AudioAppComponent
 {
 public:
 
-    enum mainWindowGeom
-    {
-        width = 800,
-        height = 600,
-    };
-
     //==============================================================================
     MainComponent();
     ~MainComponent() override;
@@ -33,15 +27,18 @@ public:
 
 private:
     //==============================================================================
-    const long unsigned int howManySeqs{2};
+    const long unsigned int howManySeqs{7};
 
     juce::OwnedArray<SliderGroup> sequencers;
+
+    int  myWidth = 800;
+    int  myHeight = 600;
 
     // Sequencers.
     int x0{100};     //
     int y0{100};     //
     int seqW{400};    
-    int seqH{100}; 
+    int seqH{60}; 
 
     SliderGroup seq0;
         

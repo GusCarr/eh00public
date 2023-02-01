@@ -15,11 +15,13 @@ public:
 
     // Public attributes.
     bool withBar{false};
-    bool fillBack{false};    
+    bool withFrame{false};    
+    bool fillBack{false};        
     
     juce::Colour foregroundColour{juce::Colours::orange};
     juce::Colour backgroundColour{juce::Colours::darkgrey};
-    
+    juce::Colour frameColour{juce::Colours::darkgrey};
+
     float backgroundAlpha{1.0};
     
 
@@ -27,6 +29,11 @@ public:
     void setWithBar(const bool choice)
     {
         withBar = choice;
+    }
+
+    void setWithFrame(const bool choice)
+    {
+        withFrame = choice;
     }
 
     void setFillBack(const bool choice)
@@ -42,6 +49,11 @@ public:
     void setBackgroundColour(const juce::Colour inColour) 
     {
         backgroundColour = inColour.withAlpha(backgroundAlpha);
+    };
+
+    void setFrameColour(const juce::Colour inColour) 
+    {
+        frameColour = inColour; //.withAlpha(backgroundAlpha);
     };
 
     void setBackgroundAlpha(const float Alpha) 
@@ -60,8 +72,8 @@ public:
                             float maxSliderPos,
                             const juce::Slider::SliderStyle theStyle,
                             juce::Slider& theSlider) override
-    {
-        juce::Rectangle<int> sliderArea(x, y, width, height);
+    {        
+        juce::Rectangle<float> sliderArea(x, y, width, height);
 
         if (fillBack) 
         {
@@ -72,19 +84,19 @@ public:
         // level indicator.
         g.setColour (foregroundColour);
 
-        int theHeight{(height - (int) sliderPos + y + 1)};
+        int theHeight{(height - (int) (sliderPos + y))};
 
         if (!withBar) 
         {
             theHeight = 1;
         }
 
-        g.fillRect (x, juce::jmax(1, (int) sliderPos), width, juce::jmax(2, theHeight));
+        g.fillRect (x, juce::jmax(0.5 * width, sliderPos - 2.0), width, juce::jmax(2, theHeight));
 
         // outer frame.        
-         if (!fillBack) 
+         if (withFrame) 
         {
-            g.setColour (backgroundColour); 
+            g.setColour (frameColour); 
             g.drawRect (sliderArea);        
         }        
     };    
